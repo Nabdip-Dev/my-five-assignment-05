@@ -22,7 +22,7 @@
 </head>
 
 <body>
-    <section class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <section class="bg-gray-100 hidden min-h-screen flex items-center justify-center">
         <div class="w-80 mx-auto static bg-[#FFFFFF] rounded-box border border-base-300 py-6">
             <div class="items-center  justify-center">
                 <img class="mx-auto mb-4" src="./assets/github-logo.png" alt="">
@@ -53,6 +53,33 @@
         </div>
     </section>
 
+    <section class="min-h-screen bg-gray-100">
+        <header class="bg-white">
+            <nav class="w-full mx-auto flex items-center justify-between px-14 py-2">
+                <div class="flex items-center gap-1">
+                    <img class="w-6 h-6" src="./assets/github-logo.png" alt="">
+                    <h2 class="text-1xl font-bold">GitHub Issues Tracker</h2>
+                </div>
+                <div class="join">
+                    <div>
+                        <label class="input validator join-item">
+                            <!-- <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                                    stroke="currentColor">
+                                    <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                </g>
+                            </svg> -->
+                            <i class="fa-brands fa-sistrix"></i>
+                            <input type="search" placeholder="Search issues.." required />
+                        </label>
+                        <div class="validator-hint hidden">Enter valid Name</div>
+                    </div>
+                    <button class="btn btn-neutral bg-[#4A00FF] join-item">+ New Issue</button>
+                </div>
+            </nav>
+        </header>
+    </section>
 
 </body>
 
