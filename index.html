@@ -54,6 +54,7 @@
     </section>
 
     <section class="min-h-screen bg-gray-100">
+        <!-- navber -->
         <header class="bg-white">
             <nav class="w-full mx-auto flex items-center justify-between px-14 py-2">
                 <div class="flex items-center gap-1">
@@ -79,8 +80,96 @@
                 </div>
             </nav>
         </header>
-    </section>
 
+        <div class="w-11/12 mx-auto ">
+
+            <!-- button header -->
+            <div id="tab-btn" class="flex mx-auto gap-4 bg-white rounded mt-8 px-4 py-3">
+                <button class="btn bg-[#4A00FF] text-white px-8">All</button>
+                <button class="btn px-8">Open</button>
+                <button class="btn px-8">Closed</button>
+            </div>
+
+            <!-- main section -->
+            <div>
+
+                <!-- count header -->
+                <div class="flex mx-auto justify-between bg-white rounded mt-4 px-4 py-3">
+
+                    <!-- left count -->
+                    <div class="flex gap-4 flex-1">
+                        <img src="./assets/Aperture.png" alt="">
+                        <div>
+                            <h1>50 Issues</h1>
+                            <p>Track and manage your project issues</p>
+                        </div>
+                    </div>
+
+                    <!-- right stutas -->
+                    <div class="flex flex-1 gap-4 justify-end items-center">
+                        <div class="flex gap-1">
+                            <img src="./assets/Open-Status.png" alt="">
+                            <p>Open</p>
+                        </div>
+                        <div class="flex gap-1">
+                            <img src="./assets/Closed- Status .png" alt="">
+                            <p>Closed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- card-contanir -->
+                <div id="card-container" class="bg-white grid grid-cols-3">
+
+                    <!-- <div class="max-w-sm bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-green-500">
+
+                        <div class="p-5 space-y-4">
+
+                            
+                            <div class="flex justify-between items-center">
+                                <img src="./assets/Open-Status.png" alt="">
+
+                                <span
+                                    class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-semibold">
+                                    MEDIUM
+                                </span>
+                            </div>
+
+                            
+                            <h2 class="text-xl font-bold text-gray-800">
+                                Fix Navigation Menu On Mobile Devices
+                            </h2>
+
+                            
+                            <p class="text-gray-500 text-sm">
+                                The navigation menu doesn't collapse properly on mobile devices...
+                            </p>
+
+                           
+                            <div class="flex gap-3">
+                                <span class="px-3 py-1 text-sm border border-red-300 text-red-500 rounded-full">
+                                    BUG
+                                </span>
+
+                                <span class="px-3 py-1 text-sm border border-yellow-400 text-yellow-600 rounded-full">
+                                    HELP WANTED
+                                </span>
+                            </div>
+                        </div>
+
+                        
+                        <div class="border-t px-5 py-3 text-sm text-gray-500">
+                            <p>#1 by john_doe</p>
+                            <p>1/15/2024</p>
+                        </div>
+
+                    </div> -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./script/index.js"></script>
 </body>
 
 </html>
