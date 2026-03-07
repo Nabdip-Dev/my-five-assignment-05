@@ -23,6 +23,22 @@ const labelStyles = {
 };
 
 
+// step-3 modal show kora
+const loadWordDetils = async (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`; 
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const card = data.data.find(c => c.id === id);
+    if (!card) {
+        alert(`Issue with ID ${id} not found!`);
+        return;
+    }
+
+    detilsDisplay(card);
+}
+
+
 // step-1 -- all card show sob somoy ar jonno
 const loadAllCard = () => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`
@@ -53,10 +69,11 @@ const displayCard = (cards) => {
 
     const countEl = document.getElementById("issue-count");
     countEl.textContent = `${cards.length} Issues`;
+
     for (let card of cards) {
         const plantDiv = document.createElement('div')
         plantDiv.innerHTML = `
-         <div class="max-w-sm h-full bg-white rounded-xl shadow-md overflow-hidden border-t-4 ${card.status === 'open' ? 'border-[#00A96E]' : 'border-[#A855F7]'}">
+         <div onclick="loadWordDetils(${card.id})" class="max-w-sm h-full bg-white rounded-xl shadow-md overflow-hidden border-t-4 ${card.status === 'open' ? 'border-[#00A96E]' : 'border-[#A855F7]'}">
 
                         <div class="p-5 space-y-4">
 
@@ -81,16 +98,16 @@ const displayCard = (cards) => {
                             <!-- Tags -->
                            <div class="flex gap-3 flex-wrap">
                             ${card.labels.map(label => {
-                                const style = labelStyles[label.toLowerCase()] || {
-                                    color: 'bg-gray-100 text-gray-600 border-gray-300',
-                                    icon: ''
-                                };
-                                return `
+            const style = labelStyles[label.toLowerCase()] || {
+                color: 'bg-gray-100 text-gray-600 border-gray-300',
+                icon: ''
+            };
+            return `
                                     <span class="px-3 py-1 text-sm rounded-full border ${style.color}">
                                     ${style.icon} ${label.toUpperCase()}
                                     </span>
                                 `;
-                            }).join('')}
+        }).join('')}
                             </div>
                         </div>
 
@@ -106,3 +123,51 @@ const displayCard = (cards) => {
     }
 }
 loadAllCard()
+
+
+// step-3.1 modal show kora
+const detilsDisplay = (card) => {
+    console.log(card);
+    const detilsBox = document.getElementById("detils-container")
+    detilsBox.innerHTML = `
+                   <div class="mb-4 space-y-4">
+                        <h2 class="text-xl font-semibold text-gray-800">${card.title}</h2>
+                        <div class="flex items-center mt-1 gap-2">
+                           <span class="px-3 py-1 rounded-full text-white text-sm font-semibold ${card.status === 'open' ? 'bg-[#00A96E]' : 'bg-[#A855F7]'}">${card.status.toUpperCase()}</span>
+                            <span class="text-gray-500 text-sm">• Opened by ${card.assignee ? `${card.assignee.toUpperCase()}` : `<span class="text-red-500 font-semibold">Not Found Name</span>`} • ${card.updatedAt}</span>
+                        </div>
+                        <div class="flex gap-3 flex-wrap">
+                            ${card.labels.map(label => {
+                                const style = labelStyles[label.toLowerCase()] || {
+                                    color: 'bg-gray-100 text-gray-600 border-gray-300',
+                                    icon: ''
+                                };
+                                return `
+                                                        <span class="px-3 py-1 text-sm rounded-full border ${style.color}">
+                                                        ${style.icon} ${label.toUpperCase()}
+                                                        </span>
+                                                    `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <p class="text-[#64748B] mb-4">
+                        ${card.description}
+                    </p>
+
+
+                    <div class="flex justify-between items-center rounded bg-[#F8FAFC] p-3">
+                        <div class="flex-1">
+                            <p class="text-gray-500 text-sm">Assignee:</p>
+                            <p class="font-semibold text-gray-800">${card.assignee.toUpperCase()}</p>
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <p class="text-gray-500 text-sm">Priority:</p>
+                            <span class="px-3 py-1 rounded-full text-sm font-semibold
+                               ${card.priority === 'high' ? 'bg-red-100 text-red-600' : card.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' : card.priority === 'low' ? 'bg-[#EEEFF2] text-[#9CA3AF]' : 'bg-gray-100 text-gray-600'}"> ${card.priority.toUpperCase()} 
+                            </span>
+                        </div>
+                    </div>
+    `
+    document.getElementById("word_modal").showModal()
+}
