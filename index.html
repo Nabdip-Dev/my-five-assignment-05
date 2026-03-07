@@ -85,9 +85,9 @@
 
             <!-- button header -->
             <div id="tab-btn" class="flex mx-auto gap-4 bg-white rounded mt-8 px-4 py-3">
-                <button class="btn bg-[#4A00FF] text-white px-8">All</button>
-                <button class="btn px-8">Open</button>
-                <button class="btn px-8">Closed</button>
+                <button onclick="loadCardByStatus('all')" class="btn bg-[#4A00FF] text-white px-8">All</button>
+                <button onclick="loadCardByStatus('open')" class="btn bg-green-500 text-white px-8">Open</button>
+                <button onclick="loadCardByStatus('closed')" class="btn bg-red-500 text-white px-8">Closed</button>
             </div>
 
             <!-- main section -->
@@ -100,7 +100,7 @@
                     <div class="flex gap-4 flex-1">
                         <img src="./assets/Aperture.png" alt="">
                         <div>
-                            <h1>50 Issues</h1>
+                            <h1 id="issue-count">50 Issues</h1>
                             <p>Track and manage your project issues</p>
                         </div>
                     </div>

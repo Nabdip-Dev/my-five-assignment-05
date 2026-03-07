@@ -1,10 +1,18 @@
-
-const loadCard = () => {
+const loadAllCard = () => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`
     fetch(url)
         .then((res) => res.json())
         .then((card) => {
             displayCard(card.data)
+        });
+}
+
+const loadCardByStatus = (status) => {
+    fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
+        .then(res => res.json())
+        .then(data => {
+            const filtered = status === 'all' ? data.data : data.data.filter(c => c.status === status);
+            displayCard(filtered);
         });
 }
 
@@ -14,6 +22,8 @@ const displayCard = (cards) => {
     const cardCont = document.getElementById("card-container")
     cardCont.innerHTML = "";
 
+    const countEl = document.getElementById("issue-count");
+    countEl.textContent = `${cards.length} Issues`;
     for (let card of cards) {
         const plantDiv = document.createElement('div')
         plantDiv.innerHTML = `
@@ -24,8 +34,8 @@ const displayCard = (cards) => {
                             <!-- Top -->
                             <div class="flex justify-between items-center">
                                 <img src="${card.status === 'open'
-                                    ? './assets/Open-Status.png'
-                                    : './assets/Closed- Status .png'}" alt="">
+                ? './assets/Open-Status.png'
+                : './assets/Closed- Status .png'}" alt="">
 
                                 <span
                                     class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-sm font-semibold">
@@ -64,4 +74,4 @@ const displayCard = (cards) => {
         cardCont.appendChild(plantDiv)
     }
 }
-loadCard()
+loadAllCard()
