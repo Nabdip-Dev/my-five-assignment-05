@@ -29,7 +29,7 @@ const labelStyles = {
 
 // step-4 modal show kora
 const loadWordDetils = async (id) => {
-    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`; 
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`;
     const res = await fetch(url);
     const data = await res.json();
 
@@ -53,9 +53,28 @@ const loadAllCard = () => {
         });
 }
 
+// step-5 --search funcation kaj
+const searchInput = document.getElementById("search-input");
+searchInput.addEventListener("input", () => {
+    const searchText = searchInput.value.toLowerCase();
+
+    fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
+        .then(res => res.json())
+        .then(data => {
+
+            const filtered = data.data.filter(card =>
+                card.title.toLowerCase().includes(searchText) ||
+                card.description.toLowerCase().includes(searchText) ||
+                card.author.toLowerCase().includes(searchText)
+            );
+
+            displayCard(filtered);
+        });
+});
+
 
 // step-3----tab button click ar por dakano
-const loadCardByStatus = (event,status) => {
+const loadCardByStatus = (event, status) => {
     const buttons = document.querySelectorAll("#tab-btn button");
     buttons.forEach(b => {
         b.classList.remove("bg-[#4A00FF]", "text-white");
@@ -85,7 +104,7 @@ const displayCard = (cards) => {
     cardCont.innerHTML = "";
 
     const countEl = document.getElementById("issue-count");
-    countEl.textContent = `${cards.length} Issues`;
+    countEl.innerHTML = `<span class="font-bold">${cards.length}</span> Issues`;
 
     for (let card of cards) {
         const plantDiv = document.createElement('div')
@@ -130,7 +149,7 @@ const displayCard = (cards) => {
 
                         <!-- nicher-->
                         <div class="border-t px-5 py-3 text-sm text-gray-500">
-                            <p>#1 by ${card.author}</p>
+                            <p>#1 by ${card.author.toUpperCase()}</p>
                             <p>${card.createdAt}</p>
                         </div>
 
@@ -149,22 +168,22 @@ const detilsDisplay = (card) => {
     detilsBox.innerHTML = `
                    <div class="mb-4 space-y-4">
                         <h2 class="text-xl font-semibold text-gray-800">${card.title}</h2>
-                        <div class="flex items-center mt-1 gap-2">
+                        <div class="flex flex-col md:flex-row items-start md:items-center mt-1 gap-2">
                            <span class="px-3 py-1 rounded-full text-white text-sm font-semibold ${card.status === 'open' ? 'bg-[#00A96E]' : 'bg-[#A855F7]'}">${card.status.toUpperCase()}</span>
-                            <span class="text-gray-500 text-sm">• Opened by ${card.assignee ? `${card.assignee.toUpperCase()}` : `<span class="text-red-500 font-semibold">Not Found Name</span>`} • ${card.updatedAt}</span>
+                            <span class="text-gray-500 text-sm">• Opened by ${card.assignee ? `${card.assignee.toUpperCase()}` : `${card.author.toUpperCase()}`} • ${card.updatedAt}</span>
                         </div>
                         <div class="flex gap-3 flex-wrap">
                             ${card.labels.map(label => {
-                                const style = labelStyles[label.toLowerCase()] || {
-                                    color: 'bg-gray-100 text-gray-600 border-gray-300',
-                                    icon: ''
-                                };
-                                return `
+        const style = labelStyles[label.toLowerCase()] || {
+            color: 'bg-gray-100 text-gray-600 border-gray-300',
+            icon: ''
+        };
+        return `
                                                         <span class="px-3 py-1 text-sm rounded-full border ${style.color}">
                                                         ${style.icon} ${label.toUpperCase()}
                                                         </span>
                                                     `;
-                            }).join('')}
+    }).join('')}
                         </div>
                     </div>
 
@@ -176,7 +195,7 @@ const detilsDisplay = (card) => {
                     <div class="flex justify-between items-center rounded bg-[#F8FAFC] p-3">
                         <div class="flex-1">
                             <p class="text-gray-500 text-sm">Assignee:</p>
-                            <p class="font-semibold text-gray-800">${card.assignee.toUpperCase()}</p>
+                            <p class="font-semibold text-gray-800">${card.assignee ? `${card.assignee.toUpperCase()}` : `${card.author.toUpperCase()}`}</p>
                         </div>
                         <div class="flex-1 space-y-2">
                             <p class="text-gray-500 text-sm">Priority:</p>
