@@ -2,6 +2,18 @@ if (sessionStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "index.html";
 }
 
+const formatTime = (time) => {
+    const date = new Date(time);
+    return date.toLocaleString([], {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+};
+
+
 // lebel ar color and icon add 
 const labelStyles = {
     'bug': {
@@ -9,19 +21,19 @@ const labelStyles = {
         icon: '<i class="fa-solid fa-bug"></i>'
     },
     'help wanted': {
-        color: 'bg-blue-100 text-blue-600 border-blue-300',
+        color: 'bg-[#FFF8DB] text-[#D97706] border-[#FDE68A]',
         icon: '<i class="fa-solid fa-life-ring"></i>'
     },
     'enhancement': {
-        color: 'bg-purple-100 text-purple-600 border-purple-300',
+        color: 'bg-[#DEFCE8] text-[#00A96E] border-[#BBF7D0]',
         icon: '<i class="fa-solid fa-magic"></i>'
     },
     'good first issue': {
-        color: 'bg-green-100 text-green-600 border-green-300',
+        color: 'bg-[#E0F2FE] text-[#0284C7] border-[#7DD3FC]',
         icon: '<i class="fa-solid fa-seedling"></i>'
     },
     'documentation': {
-        color: 'bg-yellow-100 text-yellow-600 border-yellow-300',
+        color: 'bg-[#F3E8FF] text-[#9333EA] border-[#D8B4FE]',
         icon: '<i class="fa-solid fa-book"></i>'
     }
 };
@@ -148,9 +160,10 @@ const displayCard = (cards) => {
                         </div>
 
                         <!-- nicher-->
-                        <div class="border-t px-5 py-3 text-sm text-gray-500">
+                        <hr class="flex-1 border-gray-300">
+                        <div class=" px-5 py-3 text-sm text-gray-500">
                             <p>#1 by ${card.author.toUpperCase()}</p>
-                            <p>${card.createdAt}</p>
+                            <p>${formatTime(card.createdAt)}</p>
                         </div>
 
                     </div>
@@ -170,7 +183,7 @@ const detilsDisplay = (card) => {
                         <h2 class="text-xl font-semibold text-gray-800">${card.title}</h2>
                         <div class="flex flex-col md:flex-row items-start md:items-center mt-1 gap-2">
                            <span class="px-3 py-1 rounded-full text-white text-sm font-semibold ${card.status === 'open' ? 'bg-[#00A96E]' : 'bg-[#A855F7]'}">${card.status.toUpperCase()}</span>
-                            <span class="text-gray-500 text-sm">• Opened by ${card.assignee ? `${card.assignee.toUpperCase()}` : `${card.author.toUpperCase()}`} • ${card.updatedAt}</span>
+                            <span class="text-gray-500 text-sm">• Opened by ${card.assignee ? `${card.assignee.toUpperCase()}` : `${card.author.toUpperCase()}`} • ${formatTime(card.updatedAt)}</span>
                         </div>
                         <div class="flex gap-3 flex-wrap">
                             ${card.labels.map(label => {
@@ -200,7 +213,7 @@ const detilsDisplay = (card) => {
                         <div class="flex-1 space-y-2">
                             <p class="text-gray-500 text-sm">Priority:</p>
                             <span class="px-3 py-1 rounded-full text-sm font-semibold
-                               ${card.priority === 'high' ? 'bg-red-100 text-red-600' : card.priority === 'medium' ? 'bg-yellow-100 text-yellow-600' : card.priority === 'low' ? 'bg-[#EEEFF2] text-[#9CA3AF]' : 'bg-gray-100 text-gray-600'}"> ${card.priority.toUpperCase()} 
+                               ${card.priority === 'high' ? 'bg-red-600 text-white' : card.priority === 'medium' ? 'bg-yellow-600 text-white' : card.priority === 'low' ? 'bg-[#9CA3AF] text-white' : 'bg-gray-600 text-white'}"> ${card.priority.toUpperCase()} 
                             </span>
                         </div>
                     </div>
