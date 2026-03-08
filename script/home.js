@@ -1,3 +1,7 @@
+if (sessionStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "index.html";
+}
+
 // lebel ar color and icon add 
 const labelStyles = {
     'bug': {

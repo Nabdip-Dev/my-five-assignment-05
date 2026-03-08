@@ -16,8 +16,10 @@ const button = document.getElementById('Sign-btn')
 
         // step-4 
         if (UsernameValu === "admin" && PasswordValu === "admin123") {
-            alert("Login successful! Welcome back.");
+            alert("Login successful! Redirecting to home page...");
+            sessionStorage.setItem("isLoggedIn", "true");
             window.location.href = "home.html";
+           
         }
 
         else if (UsernameValu !== "admin" && PasswordValu !== "admin123") {
