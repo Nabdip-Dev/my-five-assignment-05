@@ -23,7 +23,7 @@ const labelStyles = {
 };
 
 
-// step-3 modal show kora
+// step-4 modal show kora
 const loadWordDetils = async (id) => {
     const url = `https://phi-lab-server.vercel.app/api/v1/lab/issues`; 
     const res = await fetch(url);
@@ -51,7 +51,20 @@ const loadAllCard = () => {
 
 
 // step-3----tab button click ar por dakano
-const loadCardByStatus = (status) => {
+const loadCardByStatus = (event,status) => {
+    const buttons = document.querySelectorAll("#tab-btn button");
+    buttons.forEach(b => {
+        b.classList.remove("bg-[#4A00FF]", "text-white");
+    });
+
+    // clicked button a color add
+    event.target.classList.add("bg-[#4A00FF]", "text-white");
+
+    const container = document.getElementById("card-container");
+    container.innerHTML = `<span class="loading loading-spinner loading-xl mx-auto col-span-3"></span>`;
+
+
+
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
         .then(res => res.json())
         .then(data => {
@@ -125,7 +138,7 @@ const displayCard = (cards) => {
 loadAllCard()
 
 
-// step-3.1 modal show kora
+// step-4.1 modal show kora
 const detilsDisplay = (card) => {
     console.log(card);
     const detilsBox = document.getElementById("detils-container")

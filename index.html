@@ -85,16 +85,16 @@
 
             <!-- button header -->
             <div id="tab-btn" class="flex mx-auto gap-4 bg-white rounded mt-8 px-4 py-3">
-                <button onclick="loadCardByStatus('all')" class="btn bg-[#4A00FF] text-white px-8">All</button>
-                <button onclick="loadCardByStatus('open')" class="btn bg-green-500 text-white px-8">Open</button>
-                <button onclick="loadCardByStatus('closed')" class="btn bg-red-500 text-white px-8">Closed</button>
+                <button onclick="loadCardByStatus(event,'all')" class="btn bg-[#4A00FF] text-white px-8">All</button>
+                <button onclick="loadCardByStatus(event,'open')" class="btn px-8">Open</button>
+                <button onclick="loadCardByStatus(event,'closed')" class="btn px-8">Closed</button>
             </div>
 
             <!-- main section -->
             <div>
 
                 <!-- count header -->
-                <div class="flex mx-auto justify-between bg-white rounded mt-4 px-4 py-3">
+                <div class="flex mx-auto justify-between bg-white border-b  rounded mt-4 px-4 py-3">
 
                     <!-- left count -->
                     <div class="flex gap-4 flex-1">
@@ -117,10 +117,10 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- card-contanir -->
                 <div id="card-container" class="bg-white grid grid-cols-3 gap-6 p-4">
-
+                    <!-- <span class="loading loading-spinner loading-xl"></span> -->
                     <!-- <div class="max-w-sm bg-white rounded-xl shadow-md overflow-hidden border-t-4 border-green-500">
 
                         <div class="p-5 space-y-4">
