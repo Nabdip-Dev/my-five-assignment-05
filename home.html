@@ -46,7 +46,7 @@
                         </label>
                         <div class="validator-hint hidden">Enter valid Name</div>
                     </div>
-                    <button class="btn btn-neutral bg-[#4A00FF] join-item">+ New Issue</button>
+                    <button id="btn-search" class="btn btn-neutral bg-[#4A00FF] join-item"><i class="fa-brands fa-sistrix"></i> Search</button>
                 </div>
             </nav>
         </header>
@@ -56,7 +56,7 @@
             <!-- button header -->
             <div id="tab-btn"
                 class="flex mx-auto justify-center lg:justify-start gap-4 bg-white rounded mt-8 px-4 py-3">
-                <button onclick="loadCardByStatus(event,'all')" class="btn bg-[#4A00FF] text-white px-8">All</button>
+                <button id="all-btn" onclick="loadCardByStatus(event,'all')" class="btn bg-[#4A00FF] text-white px-8">All</button>
                 <button onclick="loadCardByStatus(event,'open')" class="btn px-8">Open</button>
                 <button onclick="loadCardByStatus(event,'closed')" class="btn px-8">Closed</button>
             </div>

@@ -1,7 +1,9 @@
+// Password jeno kew na dhukte pare ter jonno funcation
 if (sessionStorage.getItem("isLoggedIn") !== "true") {
     window.location.href = "index.html";
 }
 
+// time thik korar jonno function
 const formatTime = (time) => {
     const date = new Date(time);
     return date.toLocaleString([], {
@@ -65,24 +67,34 @@ const loadAllCard = () => {
         });
 }
 
+
 // step-5 --search funcation kaj
-const searchInput = document.getElementById("search-input");
-searchInput.addEventListener("input", () => {
-    const searchText = searchInput.value.toLowerCase();
+document.getElementById('btn-search').addEventListener("click", () => {
+    const input = document.getElementById("search-input")
+    const schValue = input.value.trim().toLowerCase()
+    console.log(schValue);
+
+    const buttons = document.querySelectorAll("#tab-btn button");
+    buttons.forEach(b => {
+        b.classList.remove("bg-[#4A00FF]", "text-white");
+    });
+    document.getElementById("all-btn").classList.add("bg-[#4A00FF]", "text-white");
+
 
     fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
         .then(res => res.json())
         .then(data => {
 
-            const filtered = data.data.filter(card =>
-                card.title.toLowerCase().includes(searchText) ||
-                card.description.toLowerCase().includes(searchText) ||
-                card.author.toLowerCase().includes(searchText)
-            );
+            const filtered = data.data;
+            console.log(filtered);
+            const filterCard = filtered.filter((card) =>
+                card.title.toLowerCase().includes(schValue)
+            )
 
-            displayCard(filtered);
+            displayCard(filterCard);
         });
-});
+
+})
 
 
 // step-3----tab button click ar por dakano
