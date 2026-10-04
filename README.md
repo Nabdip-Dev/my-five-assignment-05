@@ -34,7 +34,7 @@ const newNumbers = [...numbers, 4, 5];
 
 **Answer:**
 
-- **map()**: প্রতিটি element এর উপর কাজ করে এবং নতুন একটি array return করে।
+- **map()**: প্রতিটি element এর উপর কাজ করে এবং নতুন একটি array return করে
 - **filter()**: condition অনুযায়ী কিছু element select করে নতুন array return করে।
 - **forEach()**: শুধু loop চালায়, কিন্তু নতুন array return করে না।
 
